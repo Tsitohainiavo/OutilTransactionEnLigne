@@ -219,7 +219,7 @@ namespace OutilTransactionEnLigne.Server.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest registerRequest)
+        public async Task<IActionResult> Register([FromBody] Utilisateur registerRequest)
         {
             try
             {
@@ -240,11 +240,16 @@ namespace OutilTransactionEnLigne.Server.Controllers
 
                 // Insérer le nouvel utilisateur dans la base de données
                 var sql = @"
-                INSERT INTO UTILISATEUR (EMAIL,PASSWORD)
-                VALUES (:Email, :Password)";
+            INSERT INTO UTILISATEUR (TYPEUTILISATEUR, NOM, PRENOM, EMAIL, TELEPHONE, ADRESSE, DATECREATION, PASSWORD)
+            VALUES (:TypeUtilisateur, :Nom, :Prenom, :Email, :Telephone, :Adresse, CURRENT_TIMESTAMP, :Password)";
                 await connection.ExecuteAsync(sql, new
                 {
+                    TypeUtilisateur = registerRequest.TypeUtilisateur,
+                    Nom = registerRequest.Nom,
+                    Prenom = registerRequest.Prenom,
                     Email = registerRequest.Email,
+                    Telephone = registerRequest.Telephone,
+                    Adresse = registerRequest.Adresse,
                     Password = hashedPassword
                 });
 

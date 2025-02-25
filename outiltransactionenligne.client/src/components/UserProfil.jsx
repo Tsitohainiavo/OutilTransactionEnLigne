@@ -34,7 +34,7 @@ const UserProfile = () => {
         try {
             const token = localStorage.getItem('token');
             await axios.post(
-                'https://localhost:7265/api/OracleData/send-test-email',
+                'https://localhost:7044/api/OracleData/send-test-email',
                 {},
                 {
                     headers: {
@@ -54,7 +54,7 @@ const UserProfile = () => {
         try {
             const token = localStorage.getItem('token');
             // eslint-disable-next-line no-unused-vars
-            await axios('https://localhost:7265/api/OracleData/logout', {
+            await axios('https://localhost:7044/api/OracleData/logout', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

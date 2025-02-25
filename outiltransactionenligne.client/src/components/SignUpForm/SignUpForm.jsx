@@ -1,11 +1,16 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
-import { FaLock, FaEnvelope } from 'react-icons/fa';
+import { FaLock, FaEnvelope, FaUser, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import axios from 'axios';
 
 const SignUpForm = () => {
     const [formData, setFormData] = useState({
+        typeUtilisateur: '',
+        nom: '',
+        prenom: '',
         email: '',
+        telephone: '',
+        adresse: '',
         password: '',
         confirmPassword: ''
     });
@@ -27,7 +32,12 @@ const SignUpForm = () => {
 
         try {
             const response = await axios.post('https://localhost:7044/api/OracleData/register', {
+                TypeUtilisateur: formData.typeUtilisateur,
+                Nom: formData.nom,
+                Prenom: formData.prenom,
                 Email: formData.email,
+                Telephone: formData.telephone,
+                Adresse: formData.adresse,
                 Password: formData.password
             });
 
@@ -53,6 +63,41 @@ const SignUpForm = () => {
 
                     <div className='input-box'>
                         <input
+                            type='text'
+                            placeholder='Type utilisateur'
+                        name="typeUtilisateur"
+                        value={formData.typeUtilisateur}
+                        onChange={handleChange}
+                        />
+                        <FaUser className='icon' />
+                    </div>
+
+                    <div className='input-box'>
+                        <input
+                            type='text'
+                            placeholder='Nom'
+                            name="nom"
+                            required
+                            value={formData.nom}
+                            onChange={handleChange}
+                        />
+                        <FaUser className='icon' />
+                    </div>
+
+                    <div className='input-box'>
+                        <input
+                            type='text'
+                            placeholder='Prénom'
+                            name="prenom"
+                            required
+                            value={formData.prenom}
+                            onChange={handleChange}
+                        />
+                        <FaUser className='icon' />
+                    </div>
+
+                    <div className='input-box'>
+                        <input
                             type='email'
                             placeholder='Email'
                             name="email"
@@ -61,6 +106,28 @@ const SignUpForm = () => {
                             onChange={handleChange}
                         />
                         <FaEnvelope className='icon' />
+                    </div>
+
+                    <div className='input-box'>
+                        <input
+                            type='tel'
+                            placeholder='Téléphone'
+                            name="telephone"
+                            value={formData.telephone}
+                            onChange={handleChange}
+                        />
+                        <FaPhone className='icon' />
+                    </div>
+
+                    <div className='input-box'>
+                        <input
+                            type='text'
+                            placeholder='Adresse'
+                            name="adresse"
+                            value={formData.adresse}
+                            onChange={handleChange}
+                        />
+                        <FaMapMarkerAlt className='icon' />
                     </div>
 
                     <div className='input-box'>
@@ -97,7 +164,7 @@ const SignUpForm = () => {
                     <button type='submit'>S'inscrire</button>
 
                     <div className='login-link'>
-                        <p>Vous avez dejà un compte ? <a href="/">Connectez-vous</a></p>
+                        <p>Vous avez déjà un compte ? <a href="/">Connectez-vous</a></p>
                     </div>
                 </form>
             </div>
